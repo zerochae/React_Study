@@ -20,10 +20,10 @@ code {
   color: aliceblue;
   text-align: center;
   font-size: 44px;
+  position:relative;
 }
 
 .jumbotron button{
   font-size: 44px;
   color: aliceblue;
-  margin-top: 200px;
 }
