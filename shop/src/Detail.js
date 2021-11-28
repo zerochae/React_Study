@@ -12,7 +12,7 @@ let 박스 = styled.div`
 
 function Detail(props) {
   useEffect(() => {
-      let timer = setTimeout(() => { alert변경(false) }, 1000);
+      let timer = setTimeout(() => { alert변경(false) }, 13000);
       return ()=>{clearTimeout(timer)}
   },[]);
   let [alert, alert변경] = useState(true);
@@ -28,7 +28,7 @@ function Detail(props) {
     <div className="container">
       {alert === true ? (
         <div className="my-alert">
-          <p>재고 없숨</p>
+          <Info 재고={props.재고} id={id}/>
         </div>
       ) : null}
       <div className="row">
@@ -45,7 +45,17 @@ function Detail(props) {
           <h4 className="pt-5">{findShoe.title}</h4>
           <p>{findShoe.content}</p>
           <p>{findShoe.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={
+            ()=>{ props.재고변경(
+
+              ()=>{
+                var tempArr = [...props.재고]
+                tempArr[id] = tempArr[id]-1
+                return tempArr;
+              }
+
+            ) }
+          }>주문하기</button>
           <button
             onClick={() => {
               history.goBack();
@@ -64,6 +74,10 @@ function Detail(props) {
       />
     </div>
   );
+}
+
+function Info(props){
+  return( <p> {props.재고[props.id]} </p> )
 }
 
 export default Detail;

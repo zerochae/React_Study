@@ -9,7 +9,11 @@ import data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
+
   let [shoes, changeShoe] = useState(data);
+
+  let [재고, 재고변경] = useState([10,11,12]);
+
   return (
     <div className="App">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -68,7 +72,7 @@ function App() {
         </div>
       </Route>
       <Route path="/detail/:id" >
-        <Detail shoes={shoes}/>
+        <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
       </Route> 
       <Route path="/">
         {/* 신발 카드 시작 */}
