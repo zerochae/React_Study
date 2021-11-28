@@ -1,34 +1,43 @@
 /* eslint-disable */
 
-import React from "react";
-import styled from "styled-components"
-import { useHistory , useParams} from "react-router-dom";
-import './Detail.scss'
+import { React, useEffect, useState } from "react";
+import styled from "styled-components";
+import { useHistory, useParams } from "react-router-dom";
+import "./Detail.scss";
 
 let 박스 = styled.div`
-padding : 20px;
-color: #bdbdbd
+  padding: 20px;
+  color: #bdbdbd;
 `;
 
 function Detail(props) {
-
-    let history = useHistory();
-    let {id} = useParams();
-    let num = parseInt(id) + 1; 
-    let findShoe = props.shoes.find(function(shoe){
-        return shoe.id = id;
-    });
+  useEffect(() => {
+      let timer = setTimeout(() => { alert변경(false) }, 1000);
+      return ()=>{clearTimeout(timer)}
+  },[]);
+  let [alert, alert변경] = useState(true);
+  let [inputData, inputData변경] = useState("");
+  let history = useHistory();
+  let { id } = useParams();
+  let num = parseInt(id) + 1;
+  let findShoe = props.shoes.find(function (shoe) {
+    return (shoe.id = id);
+  });
 
   return (
     <div className="container">
+      {alert === true ? (
         <div className="my-alert">
-            <p>재고 없숨</p>
+          <p>재고 없숨</p>
         </div>
+      ) : null}
       <div className="row">
         <div className="col-md-6">
           <img
-            alt="" 
-            src={`https://codingapple1.github.io/shop/shoes${parseInt(findShoe.id) + 1}.jpg`}
+            alt=""
+            src={`https://codingapple1.github.io/shop/shoes${
+              parseInt(findShoe.id) + 1
+            }.jpg`}
             width="100%"
           />
         </div>
@@ -37,9 +46,22 @@ function Detail(props) {
           <p>{findShoe.content}</p>
           <p>{findShoe.price}</p>
           <button className="btn btn-danger">주문하기</button>
-          <button onClick={()=>{ history.goBack() } } className="btn btn-danger">뒤로가기</button>
+          <button
+            onClick={() => {
+              history.goBack();
+            }}
+            className="btn btn-danger"
+          >
+            뒤로가기
+          </button>
         </div>
       </div>
+      <p> {inputData} </p>
+      <input
+        onChange={(e) => {
+          inputData변경(e.target.value);
+        }}
+      />
     </div>
   );
 }

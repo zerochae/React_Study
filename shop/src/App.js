@@ -13,15 +13,14 @@ function App() {
     <div className="App">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>
-            {" "}
-            <Link to="/"> React-Bootstrap </Link>
+          <Navbar.Brand as={Link} to="/">
+            React-Bootstrap
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="/detail"> Detail </Link>{" "}
+              <Nav.Link as={Link} to="/detail/0">
+                Detail
               </Nav.Link>
               <Nav.Link href="#pricing">Pricing</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
