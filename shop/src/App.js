@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Detail from "./Detail.js";
+import axios from 'axios';
 import data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
 
@@ -69,19 +70,27 @@ function App() {
       <Route path="/detail/:id" >
         <Detail shoes={shoes}/>
       </Route> 
-      <Route path="/card">
+      <Route path="/">
         {/* 신발 카드 시작 */}
         <div className="container">
           <div className="row">
             {/* <Route path="/detail/:id">
               <Item shoes={shoes} />;
               </Route> */}
-            <Route to="/card">
               {shoes.map( (shoe, i) => {
                 return <Item shoe={shoe} i={i} key={i} />;
               })}
-            </Route>
           </div>
+          <button className="btn btn-primary" onClick={()=>{
+
+            axios
+            .get('https://codingapple1.github.io/shop/data2.json')
+            .then((result)=>{
+              changeShoe([...shoes,...result.data])
+             })
+            .catch(()=>{});
+
+          }}> 더보기 </button>
         </div>
         {/* 신발 카드 끝*/}
       </Route>
