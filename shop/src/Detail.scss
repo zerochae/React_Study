@@ -1,22 +1,31 @@
-$메인컬러 : #ff0000;
+$메인컬러: #ff0000;
 
-.red{
-    color:red;
+.red {
+  color: red;
 }
 
 .my-alert {
-    background : #eeeeee;
-    padding : 15px;
-    border-radius : 5px;
-    max-width : 500px;
-    width : 100%;
-    margin : auto;
-  }
-  .my-alert p {
-    margin-bottom : 0;
-  }
+  background: #eeeeee;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+.my-alert p {
+  margin-bottom: 0;
+}
 
-  .my-alert2{
-      @extend .my-alert;
-      background-color: yellow;
-  }
+.my-alert2 {
+  @extend .my-alert;
+  background-color: yellow;
+}
+
+.wow-enter {
+  opacity: 0;
+}
+
+.wow-enter-active {
+  opacity: 1;
+  transition: all 500ms;
+}

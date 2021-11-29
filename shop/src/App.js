@@ -1,18 +1,21 @@
 /* eslint-disable */
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
-import { useState } from "react";
+import React ,{ useState , useContext } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Detail from "./Detail.js";
+import Cart from "./Cart.js"
 import axios from 'axios';
 import data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
 
+let 재고context = React.createContext();
 function App() {
 
   let [shoes, changeShoe] = useState(data);
 
   let [재고, 재고변경] = useState([10,11,12]);
+
 
   return (
     <div className="App">
@@ -71,9 +74,11 @@ function App() {
           {/* 대문 끝 */}
         </div>
       </Route>
+      <재고context.Provider value={재고}>
       <Route path="/detail/:id" >
         <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
       </Route> 
+        </재고context.Provider>
       <Route path="/">
         {/* 신발 카드 시작 */}
         <div className="container">
@@ -97,6 +102,9 @@ function App() {
           }}> 더보기 </button>
         </div>
         {/* 신발 카드 끝*/}
+      </Route>
+      <Route path="/cart">
+        <Cart/>
       </Route>
     </div>
   );
