@@ -1,10 +1,11 @@
 /* eslint-disable */
 
 import { React, useEffect, useState } from "react";
-import {CSSTransition} from 'react-transition-group';
+import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import { Nav } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
+import { connect } from "react-redux";
 import "./Detail.scss";
 
 let 박스 = styled.div`
@@ -39,7 +40,7 @@ function Detail(props) {
           <Nav.Item>
             <Nav.Link
               eventKey="link-0"
-              onClick={ () => {
+              onClick={() => {
                 탭변경(1);
               }}
             >
@@ -49,7 +50,7 @@ function Detail(props) {
           <Nav.Item>
             <Nav.Link
               eventKey="link-1"
-              onClick={ () => {
+              onClick={() => {
                 탭변경(2);
               }}
             >
@@ -57,7 +58,7 @@ function Detail(props) {
             </Nav.Link>
           </Nav.Item>
           <CSSTransition in={스위치} classNames="wow" timeout={500}>
-          <Tab 누른탭={누른탭} 스위치변경={스위치변경}/>
+            <Tab 누른탭={누른탭} 스위치변경={스위치변경} />
           </CSSTransition>
         </Nav>
       </div>
@@ -88,6 +89,10 @@ function Detail(props) {
                 tempArr[id] = tempArr[id] - 1;
                 return tempArr;
               });
+              props.dispatch({
+                type: "항목추가",
+                payload: { id: 2, name: "멋진신발3", qty: 3 },
+              });
             }}
           >
             주문하기
@@ -117,8 +122,7 @@ function Info(props) {
 }
 
 function Tab(props) {
-
-  useEffect( ()=>{
+  useEffect(() => {
     props.스위치변경(true);
   });
 
@@ -131,5 +135,11 @@ function Tab(props) {
   ) : null;
 }
 
-export default Detail;
+function state2props(state) {
+  return {
+    state: state.reducer,
+    alert열렸니: state.reducer2,
+  };
+}
 
+export default connect(state2props)(Detail);
