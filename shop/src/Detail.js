@@ -91,7 +91,7 @@ function Detail(props) {
               });
               props.dispatch({
                 type: "항목추가",
-                payload: { id: 2, name: "멋진신발3", qty: 3 },
+                payload: { id: findShoe.id, name: findShoe.title, qty: findShoe.quan },
               });
             }}
           >

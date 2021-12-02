@@ -16,16 +16,29 @@ let 초기값 = [
 
 function reducer(state = 초기값, 액션) {
   if (액션.type === "항목추가") {
-    let copy = [...state];
-    copy.push(액션.payload);
-    return copy;
+
+    var flag = state.findIndex( (a)=>{ return a === 액션.payload.id} )
+
+    if(flag >= 0){
+
+      let copy = [...state];
+      copy[flag].qty++;
+      return copy;
+
+    } else {
+      let copy = [...state];
+      copy.push(액션.payload);
+      return copy;
+    }
   } else if (액션.type === "수량증가") {
+
     let temp = [...state];
-    temp[0].qty++;
+    temp[액션.데이터].qty++;
     return temp;
+
   } else if (액션.type === "수량감소") {
     let temp = [...state];
-    temp[0].qty--;
+    temp[액션.데이터].qty--;
     return temp;
   } else {
     return state;
