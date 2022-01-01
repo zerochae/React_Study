@@ -1,0 +1,14 @@
+.WelcomeContainer{
+  width: 100vw;
+  height: calc(100vh - 70px);
+  display: flex;
+}
+
+.welcomeText {
+  /* position: absolute; */
+  /* top: 50vh; */
+  /* right: 50vw; */
+  margin: auto;
+  font-size: 22px;
+  font-weight: 600;
+}

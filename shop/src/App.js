@@ -1,21 +1,21 @@
 /* eslint-disable */
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
-import React ,{ useState , useContext } from "react";
+import React, { useState, useContext, lazy, Suspense } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Detail from "./Detail.js";
-import Cart from "./Cart.js"
-import axios from 'axios';
+let Detail = lazy(() => {
+  return import("./Detail.js");
+});
+import Cart from "./Cart.js";
+import axios from "axios";
 import data from "./data.js";
-import { Link, Route, Switch ,useHistory } from "react-router-dom";
+import { Link, Route, Switch, useHistory } from "react-router-dom";
 
 let 재고context = React.createContext();
 function App() {
-
   let [shoes, changeShoe] = useState(data);
 
-  let [재고, 재고변경] = useState([10,11,12]);
-
+  let [재고, 재고변경] = useState([10, 11, 12]);
 
   return (
     <div className="App">
@@ -75,10 +75,14 @@ function App() {
         </div>
       </Route>
       <재고context.Provider value={재고}>
-      <Route path="/detail/:id" >
-        <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
-      </Route> 
-        </재고context.Provider>
+        <Route path="/detail/:id">
+          render(
+          <Suspense fallback={<div> 로딩중입니다 </div>}>
+            <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
+          </Suspense>
+          )
+        </Route>
+      </재고context.Provider>
       <Route path="/">
         {/* 신발 카드 시작 */}
         <div className="container">
@@ -86,36 +90,44 @@ function App() {
             {/* <Route path="/detail/:id">
               <Item shoes={shoes} />;
               </Route> */}
-              {shoes.map( (shoe, i) => {
-                return <Item shoe={shoe} i={i} key={i} />;
-              })}
+            {shoes.map((shoe, i) => {
+              return <Item shoe={shoe} i={i} key={i} />;
+            })}
           </div>
-          <button className="btn btn-primary" onClick={()=>{
-
-            axios
-            .get('https://codingapple1.github.io/shop/data2.json')
-            .then((result)=>{
-              changeShoe([...shoes,...result.data])
-             })
-            .catch(()=>{});
-
-          }}> 더보기 </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              axios
+                .get("https://codingapple1.github.io/shop/data2.json")
+                .then((result) => {
+                  changeShoe([...shoes, ...result.data]);
+                })
+                .catch(() => {});
+            }}
+          >
+            {" "}
+            더보기{" "}
+          </button>
         </div>
         {/* 신발 카드 끝*/}
       </Route>
       <Route path="/cart">
-        <Cart/>
+        <Cart />
       </Route>
     </div>
   );
 }
 
 function Item(props) {
-
   let history = useHistory();
 
   return (
-    <div className="col-md-4" onClick={()=>{ history.push(`/datail/${props.i}`) }}>
+    <div
+      className="col-md-4"
+      onClick={() => {
+        history.push(`/datail/${props.i}`);
+      }}
+    >
       <img
         src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`}
         alt={`shoe${props.i + 1}`}
