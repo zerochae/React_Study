@@ -1,11 +1,9 @@
-import Particles from 'react-tsparticles';
-import '../style/Welcome.css'
+import Particles from "react-tsparticles";
 
-export default function WelcomeBg () {
+export default function WelcomeBg() {
   const particlesInit = (main) => {
     console.log(main);
 
-    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
   };
 
   const particlesLoaded = (container) => {
@@ -16,7 +14,7 @@ export default function WelcomeBg () {
       id="tsparticles"
       init={particlesInit}
       loaded={particlesLoaded}
-      className = "particle"
+      className="particle"
       options={{
         background: {
           color: {
@@ -54,7 +52,15 @@ export default function WelcomeBg () {
         },
         particles: {
           color: {
-            value: [,"#ff0055", "#B8E986", "#50E3C2", "#FFD300", "#E86363",,"#ff5900","#BD10E0"],
+            value: [
+              "#ff0055",
+              "#B8E986",
+              "#50E3C2",
+              "#FFD300",
+              "#E86363",
+              "#ff5900",
+              "#BD10E0",
+            ],
           },
           collisions: {
             enable: true,
@@ -88,5 +94,5 @@ export default function WelcomeBg () {
         detectRetina: true,
       }}
     />
-  )
+  );
 }

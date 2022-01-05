@@ -1,18 +1,25 @@
-import "./style/App.css";
+import "./style/global.css";
 import { useState } from "react";
 
-import Welcome from "./components/Welcome";
-import Section from "./components/container/Section";
-import Nav from './components/Nav';
+import Section from "@/components/container/Section";
+import Nav from '@/components/component/Nav';
+import styled from 'styled-components';
 
 function App() {
-  let [step, changeStep] = useState(1);
+
+  const StyledDiv = styled.div`
+    background-color: #fff;
+    padding:30px;
+  `
+
+
+  let [step,setStep] = useState(0);
 
   return (
-    <div className="mainContainer">
-      <Nav/>
-      <Section />
-    </div>
+    <StyledDiv className="mainContainer">
+      <Section step={step} />
+      <Nav step={step} setStep={setStep}/>
+    </StyledDiv>
   );
 }
 
