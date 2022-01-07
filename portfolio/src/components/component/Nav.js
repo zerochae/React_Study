@@ -6,65 +6,75 @@ import {
   faFile,
   faAddressCard,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
-const StyledNav = styled.div`
-  width: 100%;
+const StyledDiv = styled.div`
+  width: 90%;
   height: 70px;
-  z-index: 1;
-  box-shadow: 0px 0px 15px #fff;
-
-  .title {
-    font-weight: bolder;
-    font-size: 44px;
-  }
-
   .btnContainer {
-    border-radius: 25px;
-    width: 100px;
-    height: 100px;
     display: flex;
+    justify-content: space-between;
+    .btn {
+      box-shadow: 6px 6px 12px #cacaca, -6px -6px 12px #ffffff;
+      border: none;
+      width: 200px;
+      height: 50px;
+      border-radius: 10px;
+      background: #edebf4;
+      font-size: 20px;
+      transition: box-shadow 3s;
+    }
+    .btn:hover {
+      box-shadow: inset 6px 6px 12px #cacaca, inset -6px -6px 12px #ffffff;
+    }
   }
-
-  button {
-    font-family: "Heebo", sans-serif;
-    font-size: 50px;
-    border: none;
-    border-radius: 50%;
-    background-color: #ebecf0;
-    text-shadow: 1px 1px 0 #fff;
-    box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
-    transition: all 0.2s ease-in-out;
-  }
-  button:hover {
-    box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+  .btn.active {
+    transition: box-shadow 3s;
+    box-shadow: inset 6px 6px 12px #cacaca, inset -6px -6px 12px #ffffff;
   }
 `;
 
+const menuItems = [
+  {
+    icon: <FontAwesomeIcon icon={faHome} />,
+    name: "home",
+  },
+  {
+    icon: <FontAwesomeIcon icon={faCode} />,
+    name: "skills",
+  },
+  {
+    icon: <FontAwesomeIcon icon={faFile} />,
+    name: "project",
+  },
+  {
+    icon: <FontAwesomeIcon icon={faAddressCard} />,
+    name: "about",
+  },
+];
+
 export default function Nav(props) {
-  const menuItems = [
-    <FontAwesomeIcon icon={faHome} />,
-    <FontAwesomeIcon icon={faCode} />,
-    <FontAwesomeIcon icon={faFile} />,
-    <FontAwesomeIcon icon={faAddressCard} />,
-  ];
+
+  const [tab, setTab] = useState(0);
+
   return (
-    <StyledNav className="nav">
-      <span className="title">zerochae</span>
+    <StyledDiv className="nav">
       <div className="btnContainer">
         {menuItems.map((item, index) => {
           return (
             <button
-              key={item}
+              className={`btn ${tab === index ? "active" : ""}`}
+              key={item.name}
               onClick={() => {
                 props.setStep(index);
+                setTab(index);
               }}
             >
-              {" "}
-              {item}{" "}
+              {item.icon}&nbsp;{item.name}
             </button>
           );
         })}
       </div>
-    </StyledNav>
+    </StyledDiv>
   );
 }
