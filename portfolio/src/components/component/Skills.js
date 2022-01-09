@@ -12,9 +12,6 @@ const StyledDiv = styled.div`
   font-size: 26px;
   font-family: "font";
   width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  max-height: 80%;
   transition: all 3s ease;
 
   ::-webkit-scrollbar {
@@ -97,17 +94,15 @@ export default function Skills() {
   //<span className="tag"> &lt;portfolio&gt; </span> <br />
 
   return (
-    <StyledDiv className="skills">
-        <pre>
-          <span className="tag">
-            &lt;skills&gt; <br />
+    <StyledDiv className="skills h1">
+          <span className="tag h1">
+            &lt;skills&gt;<br />
           </span>
           {skills.map((item, index) => {
             return (
               <div className="skillBox" key={index}>
-                &nbsp;&nbsp;
-                <span className="tag">
-                  &lt;{item.name}&gt; <br />
+                <span className="tag h2">
+                  &lt;{item.name}&gt;<br />
                 </span>
                 <div className="skill">
                   {item.data.map((item, index) => {
@@ -118,15 +113,13 @@ export default function Skills() {
                     );
                   })}
                 </div>
-                &nbsp;&nbsp;
-                <span className="tag">
-                  &lt;/{item.name}&gt; <br />
+                <span className="tag h2">
+                  &lt;/{item.name}&gt;<br />
                 </span>
               </div>
             );
           })}
-        </pre>
-      <span className="tag">
+      <span className="tag h1">
         &lt;/skills&gt; <br />
       </span>
     </StyledDiv>

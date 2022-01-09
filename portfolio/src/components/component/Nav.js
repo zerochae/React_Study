@@ -9,11 +9,15 @@ import {
 import { useState } from "react";
 
 const StyledDiv = styled.div`
-  width: 90%;
-  height: 70px;
+  width: 80%;
+  height: 140px;
+  position: fixed;
+  background: #edebf4;
   .btnContainer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 100%;
     .btn {
       box-shadow: 6px 6px 12px #cacaca, -6px -6px 12px #ffffff;
       border: none;

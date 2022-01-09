@@ -56,6 +56,10 @@ const StyledDiv = styled.div`
       
     }
   }
+
+  a{
+    margin-left : 15px;
+  }
   
 
   .textContainer{
@@ -121,8 +125,7 @@ const about = [
 export default function About() {
   return (
     <StyledDiv>
-      <pre>
-        &nbsp;&nbsp;<span className="tag"> &lt;about&gt; </span> <br />
+        &nbsp;&nbsp;<span className="tag h1">&lt;about&gt;</span> <br />
         <div className="about">
           &nbsp;&nbsp;
           <div className="textContainer">
@@ -164,11 +167,9 @@ export default function About() {
         </div>
         {about.map((item, index) => {
           return (
-            <div className="aboutBox" key={index}>
-              <div className="about"></div>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <span className="tag">
-                &lt;{item.name}&gt; <br />
+            <div className="aboutBox h1" key={index}>
+              <span className="tag h2">
+                &lt;{item.name}&gt;
               </span>
               <div className="about">
                 {item.data.map((item, index) => {
@@ -186,17 +187,14 @@ export default function About() {
                   );
                 })}
               </div>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <span className="tag">
-                &lt;/{item.name}&gt; <br />
+              <span className="tag h2">
+                &lt;/{item.name}&gt;
               </span>
             </div>
           );
         })}
-        <br />
-        &nbsp;&nbsp;<span className="tag"> &lt;/about&gt; </span> <br /> <br />
-        <span className="tag"> &lt;/portfolio&gt; </span>
-      </pre>
+        &nbsp;&nbsp;<span className="tag h1">&lt;/about&gt;</span> <br /> <br /> <br/>
+        <span className="tag portfolio">&lt;/portfolio&gt;</span>
     </StyledDiv>
   );
 }

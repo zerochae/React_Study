@@ -1,29 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faArrowLeft , faNewspaper } from "@fortawesome/free-solid-svg-icons";
-import {faGithub} from "@fortawesome/free-brands-svg-icons"
-// import Slider from "react-slick";
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+import {
+  faArrowRight,
+  faArrowLeft,
+  faNewspaper,
+} from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
+import kanboo from "@/img/kanboo.jpg";
+import mood from "@/img/mood.jpg";
 
 const StyledDiv = styled.div`
   font-size: 26px;
   font-family: "font";
-  height: 100%;
-  position: relative;
   width: 100%;
 
   .prev {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 12%;
   }
 
   .next {
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 12%;
   }
 
   .btn {
@@ -38,6 +40,7 @@ const StyledDiv = styled.div`
     background: #edebf4;
     font-size: 20px;
     transition: box-shadow 3s;
+    z-index: 1;
   }
 
   .btn:hover {
@@ -45,43 +48,32 @@ const StyledDiv = styled.div`
   }
 
   .projectContainer {
-    /* height: 90%;
-    width: 50vw;
-    align-items: center;
     display: flex;
-    margin: auto;
-    position: relative; */
-
-    height: 90%;
-    /* width:50vw; */
-    display: flex;
-    margin: 0 50px;
+    margin: auto 0;
     overflow: hidden;
     transition: all 1s;
+    justify-content: center;
   }
 
   .innerContainer {
     transition: all 1s;
-    width: 100%;
   }
 
   .project {
     background: #edebf4;
     box-shadow: 6px 6px 12px #cacaca, -6px -6px 8px #ffffff;
     border-radius: 10px;
-    height: 100%;
     width: 50vw;
-    transform: scale(0.8);
     display: flex;
-    padding:25px;
+    padding: 25px;
     flex-direction: column;
   }
 
-  .content { 
+  .content {
     height: 90%;
   }
 
-  .menu{
+  .menu {
     height: 10%;
     display: flex;
     justify-content: space-around;
@@ -93,120 +85,112 @@ const StyledDiv = styled.div`
     justify-content: space-around;
   }
 
+  a {
+    text-decoration: none;
+  }
 
+  .projectImg {
+    height: 100%;
+    width: 100%;
+    margin: 30px auto;
+    border-radius: 10px;
+    width: fit-content;
+    display: block;
+    padding: 8px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
 `;
 
 const project = [
   {
-    idx: 5,
+    idx: 3,
     name: "mood",
     url: "https://zerochae2.github.io/",
+    git: "",
+    img: "",
+    skills: [],
     description: "",
   },
   {
     idx: 1,
     name: "kanboo",
     url: "http://kanboo.site",
+    git: "https://github.com/zerochae/backupBeforeMerge",
+    img: kanboo,
+    skills: ["vue.js", "jpa", "java", "spring boot", "maria db"],
     description: "",
+    myWork: "",
   },
   {
     idx: 2,
     name: "mood",
     url: "https://zerochae2.github.io/",
+    git: "https://github.com/zerochae/Mood_V2",
+    img: mood,
+    skills: ["vue.js", "node.js", "mysql"],
     description: "",
+    myWork: "",
   },
   {
     idx: 3,
     name: "portfolio",
     url: "https://zerochae.github.io/portfolio",
+    git: "",
+    img: "",
+    skills: ["react"],
     description: "",
-  },
-  {
-    idx: 4,
-    name: "kanboo",
-    url: "http://kanboo.site",
-    description: "",
-  },
-  {
-    idx: 5,
-    name: "mood",
-    url: "https://zerochae2.github.io/",
-    description: "",
+    myWork: "",
   },
   {
     idx: 1,
     name: "kanboo",
     url: "http://kanboo.site",
+    git: "",
+    img: "",
+    skills: "",
     description: "",
   },
-  // {
-  //   idx: 5,
-  //   name: "portfolio",
-  //   url: "https://zerochae.github.io/portfolio",
-  //   description: "",
-  // },
-  // {
-  //   idx: 6,
-  //   name: "kanboo",
-  //   url: "http://kanboo.site",
-  //   description: "",
-  // },
-  // {
-  //   idx: 7,
-  //   name: "mood",
-  //   url: "https://zerochae2.github.io/",
-  //   description: "",
-  // },
-  // {
-  //   idx: 8,
-  //   name: "portfolio",
-  //   url: "https://zerochae.github.io/portfolio",
-  //   description: "",
-  // },
 ];
 
 export default function Project() {
-
   let [step, setStep] = useState(1);
 
   const firstToLast = () => {
-
     setStep(step - 1);
-    
-    setTimeout( () => {
+
+    setTimeout(() => {
       Array.from(projectContainer.current.childNodes).map((item) => {
         return (item.style.transition = "none");
       });
       setStep(project.length - 2);
-    },1000)
-    
-    
-    setTimeout( () => {
+    }, 1000);
+
+    setTimeout(() => {
       Array.from(projectContainer.current.childNodes).map((item) => {
         return (item.style.transition = "all 1s");
       });
-    },1000)
-
+    }, 1100);
   };
 
   const lastToFirst = () => {
-
     setStep(step + 1);
 
-    setTimeout( () => {
+    setTimeout(() => {
       Array.from(projectContainer.current.childNodes).map((item) => {
         return (item.style.transition = "none");
       });
       setStep(1);
-    },1000)
-    
+    }, 1000);
 
-    setTimeout( () => {
+    setTimeout(() => {
       Array.from(projectContainer.current.childNodes).map((item) => {
         return (item.style.transition = "all 1s");
       });
-    },1100)
-
+    }, 1100);
   };
 
   useEffect(() => {});
@@ -214,8 +198,9 @@ export default function Project() {
   const projectContainer = useRef();
 
   return (
-    <StyledDiv>
-      <button
+    <StyledDiv className="h1">
+      <span className="tag h1">&lt;project&gt;</span>
+      {/* <button
         className="prev btn"
         onClick={() => {
           step > 1 ? setStep(step - 1) : firstToLast();
@@ -230,10 +215,8 @@ export default function Project() {
         }}
       >
         <FontAwesomeIcon icon={faArrowRight} />
-      </button>
-      <span className="tag"> &lt;project&gt; </span> <br />
+      </button> */}
       <div className="projectContainer" ref={projectContainer}>
-        {/* 반복문 ㄱㄱ */}
         {project.map((item, index) => {
           return (
             <div
@@ -241,26 +224,26 @@ export default function Project() {
               key={index}
               style={{ transform: `translateX(${step * 50 * -1}vw)` }}
             >
-              <div className="project">
+              {/* <div className="project">
                 <div className="content">
-                idx:{item.idx} step:{step}
+                  <img src={item.img} alt="img" />
                 </div>
                 <div className="menu">
-                <button className="btn menuBtn">
-                <FontAwesomeIcon icon={faNewspaper} />  <span>WebPage</span>
-                </button>
-                <button className="btn menuBtn">
-                <FontAwesomeIcon icon={faGithub} /> <span>GitHub</span> 
-                
-                </button>
+                  <button className="btn menuBtn">
+                    <FontAwesomeIcon icon={faNewspaper} /> <span>WebPage</span>
+                  </button>
+                  <a href={item.url}>
+                    <button className="btn menuBtn">
+                      <FontAwesomeIcon icon={faGithub} /> <span>GitHub</span>
+                    </button>
+                  </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           );
         })}
-        {/* 반복문 끝 */}
       </div>
-      <span className="tag"> &lt;/project&gt; </span>
+      <span className="tag h1">&lt;/project&gt;</span>
     </StyledDiv>
   );
 }
